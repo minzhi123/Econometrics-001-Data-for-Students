@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\setlength{\parindent}{0in}
+
+%These packages allow the most of the common "mathly things"
+\usepackage{amsmath,amsthm,amssymb}
+
+%This package allows you to add graphs or any other images.
+\usepackage{graphicx}
+
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{multicol}
+
+%------------------------------------------
+% The stuff you want to edit starts here.
+%------------------------------------------
+\begin{document}
+
+\title{Problem Set 3 Solutions} 
+\author{Minzhi Meng}
+\maketitle
+
+
+%question1
+{\bf Question 1} 
+\bigskip\\
+To capture the life-cycle pattern of wages, consider the following multiple linear regression model
+$$wage = \beta_0 + \beta_1educ + \beta_2exper + \beta_3exper^2 + \epsilon $$\\
+where $wage$ is the wage rate measured in dollar per hour, $educ$ is years of education, $exper$ is years of work experience, $exper^2$ is squared years of experience (in the dataset is called $expersq$). 
+
+\begin{enumerate}[(1)]
+
+%--------------------------------------------------------------------------------
+%part(1)
+\item Estimate the equation and report the results. (For full credit give your answer as a formula and a word explanation)
+\smallskip\\
+{\bf Solution:\\}
+$wage = -3.9649 + 0.5953educ + 0.2683exper – 0.0046exper^2$\\
+Standard interpretation. For example take the coefficient on $educ$. The estimated coefficient for $educ$ ($\beta_{1}$) is 0.5953. $p value < 0.05$, thus at 0.05 level of significance, the coefficient $\beta_1$ is statistically significant. It says that on average, one extra year of education increases the wage of a person by 0.5963 dollar per hour, holding other variables constant.
+
+%--------------------------------------------------------------------------------
+%part(2)
+\item What is the marginal effect of a year increase in the work experience for a person with 18 years of work experience?
+\smallskip\\
+{\bf Solution:}
+\smallskip\\
+$\frac{\partial wage}{\partial exper}|_{educ}  = 0.2683 - 2 * 0.0046 * exper = 0.2683 - 2 * 0.0046 * 18 = 0.1027$
+
+
+\end{enumerate}
+
+
+
+
+\bigskip\\
+\bigskip\\
+%question2
+{\bf Question 2}
+\bigskip\\
+Load data via link below and store in dataframe $fare$, where $year$ is 1997, 1998, 1999, 2000, $id$ is route identifier, $dist$ is the distance of the route measured in miles, $passen$ is the average number of passengers per day, $fare$ is the average one-way fare of the route measured in dollar per day, $conc$ is the percent of market controlled by the biggest carrier on route
+
+\begin{enumerate}[(1)]
+\item Generate a new variable called $yr00$ which takes on values 1 if the observation is in 2000 and 0 otherwise (a dummy variable).
+\smallskip\\
+{\bf Solution:\\}
+skipped...
+
+
+\item Estimate the model 1 using OLS and print the summary results.
+\smallskip\\
+{\bf Solution:\\}
+Model 1):  $fare = 46.1894 + 0.0888dist+ 0.7336conc + \epsilon$
+
+
+
+\item Consider the null hypothesis that $\beta_2 = 0$ and $\beta_3 = 0$ in Model 1. What is the alternative hypothesis? Conduct the test and state your decision. 
+\smallskip\\
+{\bf Solution:\\} 
+$F( 2, 4593) = 1633$\\
+$Prob > F = 0.0000$\\
+The alternative hypothesis is that either of the coefficients is nonzero. The $p$ value is very low so we reject the null in favor of the alternative implying that these coefficients are nonzero.
+
+
+
+\item State in words and numbers how we should interpret the estimated coefficients in Model 1. (for full credit explain how you know if it is statistically signiﬁcant) 
+\smallskip\\
+{\bf Solution:\\} 
+Standard interpretation. For example take the coefficient on $conc$. $\beta_3$ = 0.7336, $p value < 0.05$, thus at 0.05 level of significance, the coefficient for $conc$ ($\beta_3$) is statistically significant. It refers to market concentration and thus on average, an 1\% increase in the market concentration increases the fare by 0.7336 dollar, holding other variables constant.
+
+
+\item Generate an interaction term called $yr00dist$ by multiplying the variable $dist$ by the variable you created in part (1), $yr00dist = yr00 * dist$
+\smallskip\\
+{\bf Solution:\\}
+skipped...
+
+
+\item Estimate the model 2 using OLS and print the summary results.
+\smallskip\\
+{\bf Solution:\\}
+Model 2):  $fare = 41.6998 + 0.0893dist + 0.7438conc + 14.7778yr00 - 0.0016yr00dist + \epsilon$
+
+
+\item What is the base group for Model 2?
+\smallskip\\
+{\bf Solution:\\} 
+Where the dummy variables take the 0 values - in this case, where yr00 = 0, that is in all other years than 2000
+
+
+
+\item State in words and numbers how we should interpret the estimated coeﬃcients respectively in Model 2. (for full credit explain how you know if it is statistically signiﬁcant)
+\smallskip\\
+{\bf Solution:\\} 
+The coefficient of yr00dist is -0.0016. We can interpret that on average fare in 2000 decreases by 0.1\% less than it does in other years than 2000 when distance increases by one mile, holding other variables constant. However, the $p$ value is 0.604 which is larger than 0.05, thus at the level of 0.05 significance, the interaction term is not statistically significant. 
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
